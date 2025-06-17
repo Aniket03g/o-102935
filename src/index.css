@@ -22,55 +22,25 @@
   }
 
   body {
-    font-family: 'Inter', sans-serif;
-    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white antialiased transition-colors duration-300;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    @apply bg-white text-gray-900 antialiased;
     font-feature-settings: 'cv11', 'ss01';
     font-variation-settings: 'opsz' 32;
+    letter-spacing: -0.011em;
   }
 
   html {
     scroll-behavior: smooth;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight;
+  }
 }
 
 @layer components {
-  .nav-link {
-    @apply relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-all duration-300;
-  }
-
-  .nav-link::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300;
-  }
-
-  .nav-link:hover::after {
-    @apply w-full;
-  }
-
-  .glass-effect {
-    @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50;
-  }
-
-  .gradient-text {
-    @apply bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent;
-    background-size: 200% auto;
-    animation: gradient-shift 3s ease-in-out infinite;
-  }
-
-  .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
-  }
-
-  .hover-scale {
-    @apply transition-transform duration-300 hover:scale-105;
-  }
-
-  .animate-stagger > * {
-    animation-delay: calc(var(--stagger) * 100ms);
-  }
-
-  .border-3 {
-    border-width: 3px;
+  .text-balance {
+    text-wrap: balance;
   }
 
   .line-clamp-2 {
@@ -80,98 +50,122 @@
     -webkit-line-clamp: 2;
   }
 
-  /* Professional button styles */
+  /* Professional Focus States */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500;
+  }
+
+  /* Enhanced Button Styles */
   .btn-primary {
-    @apply bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105;
+    @apply bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold px-6 py-3 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:ring-offset-2;
   }
 
   .btn-secondary {
-    @apply bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 text-gray-900 dark:text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105;
+    @apply bg-white border border-gray-300 hover:border-gray-400 hover:bg-gray-50 text-gray-900 font-semibold px-6 py-3 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500/20 focus:ring-offset-2;
+  }
+
+  /* Card Enhancements */
+  .card-elevated {
+    @apply bg-white border border-gray-200/60 shadow-sm hover:shadow-lg transition-all duration-300 rounded-xl;
+  }
+
+  /* Input Enhancements */
+  .input-enhanced {
+    @apply border-gray-300 focus:border-blue-500 focus:ring-blue-500/20 rounded-lg transition-all duration-200;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-/* Professional scrollbar */
+/* Professional Scrollbar */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800 rounded-full;
+  @apply bg-gray-100 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 dark:bg-gray-600 rounded-full hover:bg-gray-500 dark:hover:bg-gray-500;
+  @apply bg-gray-400 rounded-full hover:bg-gray-500;
 }
 
-/* Enhanced focus styles */
-.focus-ring {
-  @apply focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 dark:focus:ring-blue-400/20 dark:focus:border-blue-400;
+::-webkit-scrollbar-corner {
+  @apply bg-transparent;
 }
 
-/* Professional transitions */
+/* Smooth Transitions */
 * {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+  transition-duration: 150ms;
 }
 
-/* Professional animations */
-@keyframes gradient-shift {
-  0%, 100% {
-    background-position: 0% 50%;
+/* Animation Keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
-  50% {
-    background-position: 100% 50%;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@keyframes professional-bounce {
+@keyframes bounce-gentle {
   0%, 100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
   }
 }
 
-@keyframes professional-pulse {
+@keyframes pulse-subtle {
   0%, 100% {
     opacity: 1;
-    transform: scale(1);
   }
   50% {
-    opacity: 0.9;
-    transform: scale(1.02);
+    opacity: 0.8;
   }
 }
 
-.animate-professional-bounce {
-  animation: professional-bounce 2s ease-in-out infinite;
+/* Animation Classes */
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
 }
 
-.animate-professional-pulse {
-  animation: professional-pulse 2s ease-in-out infinite;
+.animate-bounce-gentle {
+  animation: bounce-gentle 2s ease-in-out infinite;
 }
 
-/* Professional shadows */
-.shadow-professional {
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
 }
 
-.shadow-professional-lg {
-  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.15);
+/* Typography Enhancements */
+.text-heading {
+  @apply font-bold tracking-tight text-gray-900;
 }
 
-.dark .shadow-professional {
-  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
+.text-body {
+  @apply text-gray-600 leading-relaxed;
 }
 
-.dark .shadow-professional-lg {
-  box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.4);
+.text-caption {
+  @apply text-sm text-gray-500;
+}
+
+/* Badge Styles */
+.badge-primary {
+  @apply bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.badge-secondary {
+  @apply bg-gray-100 text-gray-700 border border-gray-200 px-3 py-1 rounded-full text-sm font-medium;
+}
+
+/* Selection Colors */
+::selection {
+  @apply bg-blue-100 text-blue-900;
 }

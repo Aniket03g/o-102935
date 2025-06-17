@@ -2,6 +2,7 @@
 import { Search, User, ShoppingCart, Moon, Sun, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [isDark, setIsDark] = useState(false);
@@ -31,66 +32,76 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-b border-gray-200/20 dark:border-gray-700/30 shadow-sm transition-all duration-300">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200/60 shadow-sm">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
+          {/* Logo */}
           <Link 
             to="/" 
-            className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-200"
+            className="text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors duration-200"
           >
             TechStore
           </Link>
           
-          <div className="hidden lg:flex items-center space-x-10">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-8">
             {categories.map((category) => (
               <Link 
                 key={category.name}
                 to={category.path} 
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-all duration-200 relative group"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group py-2"
               >
                 {category.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
           </div>
 
-          <div className="flex items-center space-x-3">
-            <button className="p-3 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-all duration-200 hover:scale-110">
-              <Search size={20} className="text-gray-600 dark:text-gray-400" />
-            </button>
-            <button 
+          {/* Actions */}
+          <div className="flex items-center space-x-2">
+            <Button variant="ghost" size="sm" className="h-10 w-10 p-0 hover:bg-gray-100">
+              <Search size={20} className="text-gray-600" />
+            </Button>
+            
+            <Button 
+              variant="ghost" 
+              size="sm" 
               onClick={toggleDarkMode}
-              className="p-3 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-all duration-200 hover:scale-110"
+              className="h-10 w-10 p-0 hover:bg-gray-100"
             >
-              {isDark ? <Sun size={20} className="text-yellow-500" /> : <Moon size={20} className="text-gray-600" />}
-            </button>
-            <button className="p-3 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-all duration-200 hover:scale-110">
-              <User size={20} className="text-gray-600 dark:text-gray-400" />
-            </button>
-            <button className="p-3 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-all duration-200 hover:scale-110 relative">
-              <ShoppingCart size={20} className="text-gray-600 dark:text-gray-400" />
-              <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium">
+              {isDark ? <Sun size={20} className="text-amber-500" /> : <Moon size={20} className="text-gray-600" />}
+            </Button>
+            
+            <Button variant="ghost" size="sm" className="h-10 w-10 p-0 hover:bg-gray-100">
+              <User size={20} className="text-gray-600" />
+            </Button>
+            
+            <Button variant="ghost" size="sm" className="h-10 w-10 p-0 hover:bg-gray-100 relative">
+              <ShoppingCart size={20} className="text-gray-600" />
+              <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium text-[10px]">
                 0
               </span>
-            </button>
-            <button 
+            </Button>
+            
+            <Button 
+              variant="ghost"
+              size="sm"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-3 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-all duration-200"
+              className="lg:hidden h-10 w-10 p-0 hover:bg-gray-100"
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            </Button>
           </div>
         </div>
 
         {/* Mobile Menu */}
-        <div className={`lg:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? 'max-h-96 opacity-100 mt-6' : 'max-h-0 opacity-0'}`}>
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 space-y-4">
-            {categories.map((category, index) => (
+        <div className={`lg:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? 'max-h-80 opacity-100 mt-6' : 'max-h-0 opacity-0'}`}>
+          <div className="bg-gray-50 rounded-xl p-4 space-y-2 border border-gray-200">
+            {categories.map((category) => (
               <Link 
                 key={category.name}
                 to={category.path}
-                className="block py-3 px-4 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-white dark:hover:bg-gray-700 rounded-lg font-medium transition-all duration-200"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="block py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg font-medium transition-all duration-200"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {category.name}
