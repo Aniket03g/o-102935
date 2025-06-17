@@ -23,11 +23,11 @@ const Navbar = () => {
   };
 
   const categories = [
-    { name: "All-in-One PCs", path: "/marketplace?category=aio" },
+    { name: "Electronics", path: "/marketplace?category=electronics" },
     { name: "Laptops", path: "/marketplace?category=laptops" },
-    { name: "Gaming Laptops", path: "/marketplace?category=gaming" },
-    { name: "Printers", path: "/marketplace?category=printers" },
-    { name: "Scanners", path: "/marketplace?category=scanners" }
+    { name: "Gaming", path: "/marketplace?category=gaming" },
+    { name: "Mobile", path: "/marketplace?category=mobile" },
+    { name: "Accessories", path: "/marketplace?category=accessories" }
   ];
 
   return (
@@ -38,7 +38,7 @@ const Navbar = () => {
             to="/" 
             className="text-2xl font-bold text-primary dark:text-white hover:scale-105 transition-transform duration-200"
           >
-            HP STORE
+            TechStore
           </Link>
           
           <div className="hidden lg:flex items-center space-x-8">

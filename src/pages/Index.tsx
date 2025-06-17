@@ -8,35 +8,35 @@ import { Zap, Shield, Truck, Headphones } from "lucide-react";
 const featuredProducts = [
   {
     id: 1,
-    name: "HP EliteOne 800 G9 AiO",
-    price: "$1,299",
-    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
-    rating: 4.5,
-    reviews: 128
+    name: "MacBook Pro 14-inch",
+    price: "$1,999",
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
+    rating: 4.8,
+    reviews: 342
   },
   {
     id: 2,
-    name: "HP OMEN 16 Gaming",
-    price: "$1,599",
+    name: "Gaming Laptop RTX 4080",
+    price: "$1,899",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
     rating: 4.7,
-    reviews: 89
+    reviews: 189
   },
   {
     id: 3,
-    name: "HP Spectre x360 14",
+    name: "Ultrabook ThinkPad X1",
     price: "$1,299",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-    rating: 4.8,
-    reviews: 94
+    image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed",
+    rating: 4.6,
+    reviews: 156
   },
   {
     id: 4,
-    name: "HP LaserJet Pro",
-    price: "$299",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+    name: "Wireless Printer Pro",
+    price: "$399",
+    image: "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae",
     rating: 4.4,
-    reviews: 167
+    reviews: 223
   }
 ];
 
@@ -44,12 +44,12 @@ const benefits = [
   {
     icon: <Zap className="w-8 h-8" />,
     title: "Lightning Fast",
-    description: "Experience blazing speeds with our latest processors and SSD technology"
+    description: "Experience blazing speeds with cutting-edge technology and performance"
   },
   {
     icon: <Shield className="w-8 h-8" />,
-    title: "Built to Last",
-    description: "Premium build quality with comprehensive warranty protection"
+    title: "Quality Assured",
+    description: "Premium products with comprehensive warranty and quality guarantee"
   },
   {
     icon: <Truck className="w-8 h-8" />,
@@ -59,7 +59,7 @@ const benefits = [
   {
     icon: <Headphones className="w-8 h-8" />,
     title: "Expert Support",
-    description: "24/7 technical support from certified HP specialists"
+    description: "24/7 technical support from certified technology specialists"
   }
 ];
 
@@ -77,7 +77,7 @@ const Index = () => {
               Shop by Category
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 animate-fade-in" style={{ animationDelay: '200ms' }}>
-              Find the perfect HP product for your needs
+              Find the perfect tech product for your needs
             </p>
           </div>
           <div className="animate-fade-in" style={{ animationDelay: '400ms' }}>
@@ -94,7 +94,7 @@ const Index = () => {
               Featured Products
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 animate-fade-in" style={{ animationDelay: '200ms' }}>
-              Discover our most popular HP devices
+              Discover our most popular tech devices
             </p>
           </div>
           
@@ -117,10 +117,10 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white animate-fade-in">
-              Why Choose HP?
+              Why Choose Us?
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 animate-fade-in" style={{ animationDelay: '200ms' }}>
-              Experience the HP advantage
+              Experience the premium difference
             </p>
           </div>
           

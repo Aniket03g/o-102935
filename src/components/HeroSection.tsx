@@ -19,23 +19,23 @@ const HeroSection = () => {
           <div className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 rounded-full px-4 py-2 mb-8 shadow-lg animate-fade-in">
             <Sparkles className="w-4 h-4 text-yellow-500" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Discover HP's Latest Innovation
+              Discover Premium Tech Products
             </span>
           </div>
 
           {/* Main heading */}
           <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 animate-fade-in" style={{ animationDelay: '200ms' }}>
-            <span className="gradient-text">HP</span>{' '}
+            <span className="gradient-text">Premium</span>{' '}
             <span className="text-gray-900 dark:text-white">Technology</span>
             <br />
-            <span className="text-gray-900 dark:text-white">That</span>{' '}
-            <span className="gradient-text">Inspires</span>
+            <span className="text-gray-900 dark:text-white">For</span>{' '}
+            <span className="gradient-text">Everyone</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '400ms' }}>
-            From powerful laptops to innovative all-in-ones, gaming rigs to essential peripherals. 
-            Experience technology designed to empower your creativity and productivity.
+            From cutting-edge electronics to essential accessories, gaming gear to mobile devices. 
+            Discover technology designed to enhance your digital lifestyle.
           </p>
 
           {/* CTA Buttons */}
@@ -64,11 +64,11 @@ const HeroSection = () => {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 animate-fade-in" style={{ animationDelay: '800ms' }}>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">500+</div>
+              <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">10K+</div>
               <div className="text-gray-600 dark:text-gray-400">Products</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">1M+</div>
+              <div className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">50K+</div>
               <div className="text-gray-600 dark:text-gray-400">Customers</div>
             </div>
             <div className="text-center">
