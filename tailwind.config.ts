@@ -20,7 +20,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["Plus Jakarta Sans", "sans-serif"],
+        sans: ["Inter", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -29,23 +29,26 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#141413",
-          foreground: "#FAFAF8",
+          DEFAULT: "#2563eb",
+          foreground: "#ffffff",
         },
         secondary: {
-          DEFAULT: "#E6E4DD",
-          foreground: "#141413",
+          DEFAULT: "#f1f5f9",
+          foreground: "#0f172a",
         },
         accent: {
-          DEFAULT: "#828179",
-          foreground: "#FAFAF8",
+          DEFAULT: "#64748b",
+          foreground: "#f8fafc",
         },
         muted: {
-          DEFAULT: "#F0EFEA",
-          foreground: "#828179",
+          DEFAULT: "#f8fafc",
+          foreground: "#64748b",
         },
-        subtle: "#C4C3BB",
-        card: "#FAFAF8",
+        card: "#ffffff",
+        destructive: {
+          DEFAULT: "#ef4444",
+          foreground: "#ffffff",
+        },
         mint: "#e6ffe6",
       },
       borderRadius: {
@@ -53,9 +56,14 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      spacing: {
+        "18": "4.5rem",
+        "88": "22rem",
+        "128": "32rem",
+      },
       keyframes: {
         "fade-up": {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         "fade-in": {
@@ -72,11 +80,11 @@ export default {
         },
         "bounce-gentle": {
           "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-5px)" },
+          "50%": { transform: "translateY(-8px)" },
         },
         "pulse-slow": {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.8" },
+          "0%, 100%": { opacity: "1", transform: "scale(1)" },
+          "50%": { opacity: "0.9", transform: "scale(1.02)" },
         },
         "wiggle": {
           "0%, 100%": { transform: "rotate(0deg)" },
@@ -84,20 +92,40 @@ export default {
           "75%": { transform: "rotate(-1deg)" },
         },
         "float": {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-10px)" },
+          "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
+          "33%": { transform: "translateY(-10px) rotate(1deg)" },
+          "66%": { transform: "translateY(5px) rotate(-1deg)" },
+        },
+        "gradient-x": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "shimmer": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
         }
       },
       animation: {
-        "fade-up": "fade-up 0.5s ease-out",
+        "fade-up": "fade-up 0.6s ease-out",
         "fade-in": "fade-in 0.6s ease-out",
-        "slide-in-right": "slide-in-right 0.4s ease-out",
-        "scale-in": "scale-in 0.3s ease-out",
-        "bounce-gentle": "bounce-gentle 2s ease-in-out infinite",
+        "slide-in-right": "slide-in-right 0.5s ease-out",
+        "scale-in": "scale-in 0.4s ease-out",
+        "bounce-gentle": "bounce-gentle 2.5s ease-in-out infinite",
         "pulse-slow": "pulse-slow 3s ease-in-out infinite",
         "wiggle": "wiggle 0.5s ease-in-out",
-        "float": "float 3s ease-in-out infinite",
+        "float": "float 4s ease-in-out infinite",
+        "gradient-x": "gradient-x 3s ease-in-out infinite",
+        "shimmer": "shimmer 2s linear infinite",
       },
+      boxShadow: {
+        'professional': '0 10px 40px -10px rgba(0, 0, 0, 0.1)',
+        'professional-lg': '0 20px 60px -15px rgba(0, 0, 0, 0.15)',
+        'glow': '0 0 20px rgba(59, 130, 246, 0.3)',
+        'glow-purple': '0 0 20px rgba(147, 51, 234, 0.3)',
+      },
+      backdropBlur: {
+        'xs': '2px',
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

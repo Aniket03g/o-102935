@@ -4,13 +4,14 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import Navbar from "../components/Navbar";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Star, Filter, Grid, List } from "lucide-react";
+import { Star, Filter, Grid, List, Heart, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const products = [
   {
     id: 1,
-    name: "HP EliteOne 800 G9 AiO",
+    name: "Dell OptiPlex 7090 All-in-One",
     price: "$1,299",
     originalPrice: "$1,499",
     rating: 4.5,
@@ -18,23 +19,25 @@ const products = [
     category: "aio",
     image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
     badge: "Bestseller",
-    specs: ["Intel i7", "16GB RAM", "512GB SSD", "23.8\" Display"]
+    specs: ["Intel i7", "16GB RAM", "512GB SSD", "23.8\" Display"],
+    discount: 13
   },
   {
     id: 2,
-    name: "HP Pavilion 15 Laptop",
-    price: "$899",
-    originalPrice: "$1,099",
-    rating: 4.3,
-    reviews: 256,
+    name: "MacBook Pro 16-inch",
+    price: "$2,399",
+    originalPrice: "$2,699",
+    rating: 4.8,
+    reviews: 456,
     category: "laptops",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-    badge: "New",
-    specs: ["Intel i5", "8GB RAM", "256GB SSD", "15.6\" FHD"]
+    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca4",
+    badge: "Premium",
+    specs: ["M2 Pro", "16GB RAM", "1TB SSD", "16.2\" Retina"],
+    discount: 11
   },
   {
     id: 3,
-    name: "HP OMEN 16 Gaming Laptop",
+    name: "ASUS ROG Strix G15",
     price: "$1,599",
     originalPrice: "$1,899",
     rating: 4.7,
@@ -42,11 +45,12 @@ const products = [
     category: "gaming",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
     badge: "Gaming",
-    specs: ["AMD Ryzen 7", "16GB RAM", "1TB SSD", "RTX 4060"]
+    specs: ["AMD Ryzen 7", "16GB RAM", "1TB SSD", "RTX 4060"],
+    discount: 16
   },
   {
     id: 4,
-    name: "HP LaserJet Pro M404n",
+    name: "Brother HL-L3270CDW",
     price: "$299",
     originalPrice: "$349",
     rating: 4.4,
@@ -54,11 +58,12 @@ const products = [
     category: "printers",
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
     badge: "Reliable",
-    specs: ["Laser Printer", "38 ppm", "Wi-Fi", "Auto Duplex"]
+    specs: ["Color Laser", "24 ppm", "Wi-Fi", "Auto Duplex"],
+    discount: 14
   },
   {
     id: 5,
-    name: "HP ScanJet Pro 2500 f1",
+    name: "Epson Perfection V39",
     price: "$199",
     originalPrice: "$229",
     rating: 4.2,
@@ -66,19 +71,21 @@ const products = [
     category: "scanners",
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
     badge: "Compact",
-    specs: ["Flatbed Scanner", "1200 DPI", "USB 3.0", "Auto Feed"]
+    specs: ["Flatbed Scanner", "4800 DPI", "USB 3.0", "Auto Feed"],
+    discount: 13
   },
   {
     id: 6,
-    name: "HP Spectre x360 14",
+    name: "Surface Laptop Studio",
     price: "$1,299",
     originalPrice: "$1,599",
-    rating: 4.8,
+    rating: 4.6,
     reviews: 94,
     category: "laptops",
     image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1",
-    badge: "Premium",
-    specs: ["Intel Evo", "16GB RAM", "512GB SSD", "2-in-1 Design"]
+    badge: "New",
+    specs: ["Intel i7", "16GB RAM", "512GB SSD", "14.4\" Touch"],
+    discount: 19
   }
 ];
 
@@ -129,40 +136,45 @@ const Marketplace = () => {
 
   const getBadgeColor = (badge: string) => {
     switch (badge) {
-      case "Bestseller": return "bg-orange-500";
-      case "New": return "bg-green-500";
-      case "Gaming": return "bg-purple-500";
-      case "Premium": return "bg-blue-500";
-      default: return "bg-gray-500";
+      case "Bestseller": return "bg-orange-500 hover:bg-orange-600";
+      case "New": return "bg-green-500 hover:bg-green-600";
+      case "Gaming": return "bg-purple-500 hover:bg-purple-600";
+      case "Premium": return "bg-blue-500 hover:bg-blue-600";
+      default: return "bg-gray-500 hover:bg-gray-600";
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <Navbar />
       
-      <main className="container mx-auto px-4 pt-32 pb-16">
+      <main className="container mx-auto px-6 pt-32 pb-16">
         <div className="mb-12 animate-fade-in">
-          <h1 className="text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-            Discover HP Products
-          </h1>
-          <p className="text-accent dark:text-gray-400 text-lg">
-            Innovative technology solutions for work, creativity, and gaming
+          <div className="flex items-center gap-4 mb-6">
+            <h1 className="text-5xl font-bold text-gray-900 dark:text-white">
+              Marketplace
+            </h1>
+            <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-3 py-1">
+              Professional Grade
+            </Badge>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 text-xl max-w-3xl">
+            Discover premium technology solutions from trusted brands. Every product is carefully curated for quality and performance.
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-4 items-center justify-between mb-8 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
-          <div className="flex gap-4 items-center">
-            <div className="text-sm text-accent dark:text-gray-400">
-              {filteredProducts.length} products found
+        <div className="flex flex-wrap gap-6 items-center justify-between mb-8 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="flex gap-6 items-center">
+            <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+              <span className="text-gray-900 dark:text-white font-semibold">{filteredProducts.length}</span> products found
             </div>
             
             <Select value={category} onValueChange={setCategory}>
-              <SelectTrigger className="w-[180px] dark:bg-gray-700 dark:text-white">
-                <SelectValue placeholder="Categories" />
+              <SelectTrigger className="w-[200px] border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400">
+                <SelectValue placeholder="All Categories" />
               </SelectTrigger>
-              <SelectContent className="dark:bg-gray-700 dark:text-white">
-                <SelectItem value="all">All Products</SelectItem>
+              <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <SelectItem value="all">All Categories</SelectItem>
                 <SelectItem value="aio">All-in-One PCs</SelectItem>
                 <SelectItem value="laptops">Laptops</SelectItem>
                 <SelectItem value="gaming">Gaming Laptops</SelectItem>
@@ -172,12 +184,12 @@ const Marketplace = () => {
             </Select>
           </div>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-3 items-center">
             <Select value={sortOrder} onValueChange={setSortOrder}>
-              <SelectTrigger className="w-[180px] dark:bg-gray-700 dark:text-white">
-                <SelectValue placeholder="Sort order" />
+              <SelectTrigger className="w-[200px] border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400">
+                <SelectValue placeholder="Sort by" />
               </SelectTrigger>
-              <SelectContent className="dark:bg-gray-700 dark:text-white">
+              <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <SelectItem value="newest">Newest First</SelectItem>
                 <SelectItem value="price-asc">Price: Low to High</SelectItem>
                 <SelectItem value="price-desc">Price: High to Low</SelectItem>
@@ -185,12 +197,12 @@ const Marketplace = () => {
               </SelectContent>
             </Select>
 
-            <div className="flex border rounded-lg overflow-hidden dark:border-gray-600">
+            <div className="flex border rounded-xl overflow-hidden border-gray-300 dark:border-gray-600">
               <Button
                 variant={viewMode === "grid" ? "default" : "ghost"}
                 size="sm"
                 onClick={() => setViewMode("grid")}
-                className="rounded-none"
+                className="rounded-none border-0"
               >
                 <Grid size={16} />
               </Button>
@@ -198,7 +210,7 @@ const Marketplace = () => {
                 variant={viewMode === "list" ? "default" : "ghost"}
                 size="sm"
                 onClick={() => setViewMode("list")}
-                className="rounded-none"
+                className="rounded-none border-0"
               >
                 <List size={16} />
               </Button>
@@ -206,11 +218,11 @@ const Marketplace = () => {
           </div>
         </div>
 
-        <div className={`grid gap-6 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" : "grid-cols-1"}`}>
+        <div className={`grid gap-8 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" : "grid-cols-1"}`}>
           {filteredProducts.map((product, index) => (
             <Card 
               key={product.id} 
-              className="group overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer bg-white dark:bg-gray-800 border-0 hover:-translate-y-1 animate-fade-in"
+              className="group overflow-hidden hover:shadow-2xl transition-all duration-500 cursor-pointer bg-white dark:bg-gray-800 border-0 shadow-lg hover:-translate-y-2 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
               onClick={() => handleProductClick(product.id)}
             >
@@ -218,43 +230,56 @@ const Marketplace = () => {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className={`absolute top-2 left-2 px-2 py-1 text-xs font-semibold text-white rounded-full ${getBadgeColor(product.badge)}`}>
+                <div className={`absolute top-4 left-4 px-3 py-1.5 text-xs font-bold text-white rounded-full ${getBadgeColor(product.badge)} transition-colors`}>
                   {product.badge}
                 </div>
-                {product.originalPrice && (
-                  <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 text-xs font-semibold rounded-full">
-                    Sale
+                {product.discount && (
+                  <div className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1.5 text-xs font-bold rounded-full shadow-lg">
+                    -{product.discount}%
                   </div>
                 )}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <div className="flex gap-3">
+                    <Button size="sm" className="bg-white/90 text-gray-900 hover:bg-white">
+                      <Heart size={16} />
+                    </Button>
+                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                      <ShoppingCart size={16} />
+                    </Button>
+                  </div>
+                </div>
               </div>
               <div className="p-6">
-                <h3 className="font-semibold text-lg mb-2 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <h3 className="font-bold text-lg mb-3 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
                   {product.name}
                 </h3>
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-primary dark:text-white font-bold text-xl">{product.price}</span>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-gray-900 dark:text-white font-bold text-2xl">{product.price}</span>
                   {product.originalPrice && (
-                    <span className="text-gray-500 line-through text-sm">{product.originalPrice}</span>
+                    <span className="text-gray-500 line-through text-lg">{product.originalPrice}</span>
                   )}
                 </div>
-                <div className="flex items-center gap-1 mb-3">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star 
-                      key={i}
-                      className={`w-4 h-4 ${i < Math.floor(product.rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
-                    />
-                  ))}
-                  <span className="text-sm text-accent dark:text-gray-400 ml-2">
-                    {product.rating} ({product.reviews} reviews)
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star 
+                        key={i}
+                        className={`w-4 h-4 ${i < Math.floor(product.rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}`}
+                      />
+                    ))}
+                  </div>
+                  <span className="font-semibold text-gray-900 dark:text-white">{product.rating}</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    ({product.reviews} reviews)
                   </span>
                 </div>
-                <div className="space-y-1">
+                <div className="flex flex-wrap gap-2">
                   {product.specs.slice(0, 2).map((spec, i) => (
-                    <span key={i} className="inline-block bg-gray-100 dark:bg-gray-700 text-xs px-2 py-1 rounded mr-1 text-gray-600 dark:text-gray-300">
+                    <Badge key={i} variant="secondary" className="text-xs px-2 py-1">
                       {spec}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
               </div>
@@ -263,10 +288,13 @@ const Marketplace = () => {
         </div>
 
         {filteredProducts.length === 0 && (
-          <div className="text-center py-16">
-            <div className="text-gray-500 dark:text-gray-400 text-lg">
+          <div className="text-center py-20">
+            <div className="text-gray-500 dark:text-gray-400 text-xl mb-4">
               No products found in this category
             </div>
+            <Button onClick={() => setCategory("all")} variant="outline">
+              View All Products
+            </Button>
           </div>
         )}
       </main>
