@@ -9,9 +9,39 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { ShieldCheck, Lock, CreditCard, MapPin, User, Mail, Phone } from "lucide-react";
 
+interface FormData {
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  cardNumber: string;
+  expiryDate: string;
+  cvv: string;
+  nameOnCard: string;
+}
+
+interface FormErrors {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
+  cardNumber?: string;
+  expiryDate?: string;
+  cvv?: string;
+  nameOnCard?: string;
+}
+
 const Checkout = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     email: '',
     firstName: '',
     lastName: '',
@@ -26,16 +56,16 @@ const Checkout = () => {
     nameOnCard: ''
   });
   
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }));
     }
   };
 
-  const validateField = (field: string, value: string) => {
+  const validateField = (field: keyof FormData, value: string): string => {
     switch (field) {
       case 'email':
         return value.includes('@') ? '' : 'Please enter a valid email address';
@@ -50,8 +80,9 @@ const Checkout = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const newErrors = {};
-    Object.keys(formData).forEach(field => {
+    const newErrors: FormErrors = {};
+    
+    (Object.keys(formData) as Array<keyof FormData>).forEach(field => {
       const error = validateField(field, formData[field]);
       if (error) newErrors[field] = error;
     });
