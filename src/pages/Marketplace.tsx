@@ -143,16 +143,16 @@ const Marketplace = () => {
 
   const getBadgeColor = (badge: string) => {
     switch (badge) {
-      case "Bestseller": return "bg-amber-50 text-amber-700 border border-amber-200";
-      case "New": return "bg-emerald-50 text-emerald-700 border border-emerald-200";
-      case "Gaming": return "bg-violet-50 text-violet-700 border border-violet-200";
-      case "Premium": return "bg-blue-50 text-blue-700 border border-blue-200";
-      default: return "bg-gray-50 text-gray-700 border border-gray-200";
+      case "Bestseller": return "bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-800";
+      case "New": return "bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800";
+      case "Gaming": return "bg-violet-50 text-violet-700 border border-violet-200 dark:bg-violet-900/20 dark:text-violet-400 dark:border-violet-800";
+      case "Premium": return "bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800";
+      default: return "bg-muted text-muted-foreground border border-border";
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background transition-colors duration-300">
       <Navbar />
       
       <main className="container-modern pt-32 pb-20">
@@ -176,7 +176,7 @@ const Marketplace = () => {
           <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center justify-between">
             {/* Search */}
             <div className="relative flex-1 max-w-lg">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
               <Input
                 placeholder="Search premium products..."
                 value={searchQuery}
@@ -188,7 +188,7 @@ const Marketplace = () => {
             <div className="flex flex-wrap gap-4 items-center">
               {/* Results count */}
               <div className="text-body font-medium whitespace-nowrap">
-                <span className="text-gray-900 font-bold">{filteredProducts.length}</span> products found
+                <span className="text-foreground font-bold">{filteredProducts.length}</span> products found
               </div>
               
               {/* Category Filter */}
@@ -196,7 +196,7 @@ const Marketplace = () => {
                 <SelectTrigger className="w-56 h-14 input-modern text-lg">
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
-                <SelectContent className="glass border-gray-200 shadow-2xl rounded-2xl">
+                <SelectContent className="glass border-border shadow-2xl rounded-2xl">
                   <SelectItem value="all">All Categories</SelectItem>
                   <SelectItem value="aio">All-in-One PCs</SelectItem>
                   <SelectItem value="laptops">Laptops</SelectItem>
@@ -211,7 +211,7 @@ const Marketplace = () => {
                 <SelectTrigger className="w-56 h-14 input-modern text-lg">
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
-                <SelectContent className="glass border-gray-200 shadow-2xl rounded-2xl">
+                <SelectContent className="glass border-border shadow-2xl rounded-2xl">
                   <SelectItem value="newest">Newest First</SelectItem>
                   <SelectItem value="price-asc">Price: Low to High</SelectItem>
                   <SelectItem value="price-desc">Price: High to Low</SelectItem>
@@ -220,15 +220,15 @@ const Marketplace = () => {
               </Select>
 
               {/* View Mode */}
-              <div className="flex bg-gray-100 rounded-2xl p-1.5 border border-gray-200">
+              <div className="flex bg-muted rounded-2xl p-1.5 border border-border">
                 <Button
                   variant={viewMode === "grid" ? "default" : "ghost"}
                   size="sm"
                   onClick={() => setViewMode("grid")}
                   className={`h-12 px-4 rounded-xl font-medium transition-all duration-200 ${
                     viewMode === "grid" 
-                      ? "bg-white shadow-sm text-gray-900" 
-                      : "hover:bg-white/50 text-gray-600"
+                      ? "bg-background shadow-sm text-foreground" 
+                      : "hover:bg-background/50 text-muted-foreground"
                   }`}
                 >
                   <Grid size={18} />
@@ -239,8 +239,8 @@ const Marketplace = () => {
                   onClick={() => setViewMode("list")}
                   className={`h-12 px-4 rounded-xl font-medium transition-all duration-200 ${
                     viewMode === "list" 
-                      ? "bg-white shadow-sm text-gray-900" 
-                      : "hover:bg-white/50 text-gray-600"
+                      ? "bg-background shadow-sm text-foreground" 
+                      : "hover:bg-background/50 text-muted-foreground"
                   }`}
                 >
                   <List size={18} />
@@ -277,10 +277,10 @@ const Marketplace = () => {
         {/* Empty State */}
         {filteredProducts.length === 0 && (
           <div className="text-center py-24 animate-fade-up">
-            <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Search className="w-10 h-10 text-gray-400" />
+            <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
+              <Search className="w-10 h-10 text-muted-foreground" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">No products found</h3>
+            <h3 className="text-2xl font-bold text-foreground mb-4">No products found</h3>
             <p className="text-body text-lg mb-8 max-w-md mx-auto">
               Try adjusting your search or filter criteria to find what you're looking for
             </p>

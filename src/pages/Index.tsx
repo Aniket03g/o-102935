@@ -65,18 +65,18 @@ const benefits = [
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-[#FAFAF8] dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen bg-background transition-colors duration-300">
       <Navbar />
       <HeroSection />
       
       {/* Categories Section */}
-      <section className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
+      <section className="py-20 bg-card transition-colors duration-300">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-card-foreground animate-fade-in">
               Shop by Category
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 animate-fade-in" style={{ animationDelay: '200ms' }}>
+            <p className="text-xl text-muted-foreground animate-fade-in" style={{ animationDelay: '200ms' }}>
               Find the perfect tech product for your needs
             </p>
           </div>
@@ -87,13 +87,13 @@ const Index = () => {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-20">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground animate-fade-in">
               Featured Products
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 animate-fade-in" style={{ animationDelay: '200ms' }}>
+            <p className="text-xl text-muted-foreground animate-fade-in" style={{ animationDelay: '200ms' }}>
               Discover our most popular tech devices
             </p>
           </div>
@@ -113,13 +113,13 @@ const Index = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 transition-colors duration-300">
+      <section className="py-20 bg-gradient-to-br from-muted/30 to-accent/30 transition-colors duration-300">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground animate-fade-in">
               Why Choose Us?
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 animate-fade-in" style={{ animationDelay: '200ms' }}>
+            <p className="text-xl text-muted-foreground animate-fade-in" style={{ animationDelay: '200ms' }}>
               Experience the premium difference
             </p>
           </div>
@@ -128,16 +128,16 @@ const Index = () => {
             {benefits.map((benefit, index) => (
               <div 
                 key={index}
-                className="text-center p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in"
+                className="text-center p-8 bg-card rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in hover-glow"
                 style={{ animationDelay: `${400 + index * 100}ms` }}
               >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 text-white rounded-xl mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary to-accent text-primary-foreground rounded-xl mb-6 hover:scale-110 transition-transform duration-300">
                   {benefit.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+                <h3 className="text-xl font-semibold mb-4 text-card-foreground">
                   {benefit.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   {benefit.description}
                 </p>
               </div>

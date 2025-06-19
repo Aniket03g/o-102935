@@ -1,6 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,13 +9,47 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 220 13% 9%;
-    --radius: 1rem;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 94%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 220 13% 9%;
+    --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
   }
 
   * {
@@ -23,12 +57,13 @@
   }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-    @apply bg-gray-50 text-gray-900 antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    @apply bg-background text-foreground antialiased;
     font-feature-settings: 'cv11', 'ss01';
     font-variation-settings: 'opsz' 32;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.015em;
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   html {
@@ -36,8 +71,8 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', 'Inter', sans-serif;
-    @apply tracking-tight font-semibold;
+    font-family: 'DM Sans', 'Inter', sans-serif;
+    @apply tracking-tight font-semibold text-foreground;
     line-height: 1.2;
   }
 
@@ -54,7 +89,7 @@
   }
 
   p {
-    @apply leading-relaxed;
+    @apply leading-relaxed text-muted-foreground;
   }
 }
 
@@ -70,33 +105,62 @@
     -webkit-line-clamp: 2;
   }
 
-  /* Modern Button Styles */
+  /* Enhanced Button Styles with Microinteractions */
   .btn-primary {
-    @apply bg-gray-900 hover:bg-gray-800 active:bg-gray-900 text-white font-semibold px-8 py-4 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-900/20 focus:ring-offset-2 transform hover:-translate-y-0.5;
+    @apply bg-primary hover:bg-primary/90 active:bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 transform hover:-translate-y-0.5 hover:scale-[1.02];
   }
 
   .btn-secondary {
-    @apply bg-white border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-900 font-semibold px-8 py-4 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500/20 focus:ring-offset-2 transform hover:-translate-y-0.5;
+    @apply bg-secondary border-2 border-border hover:border-border/80 hover:bg-secondary/80 text-secondary-foreground font-semibold px-8 py-4 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ring/20 focus:ring-offset-2 transform hover:-translate-y-0.5 hover:scale-[1.02];
   }
 
   /* Enhanced Card Styles */
   .card-premium {
-    @apply bg-white border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 rounded-3xl backdrop-blur-sm;
+    @apply bg-card border border-border shadow-sm hover:shadow-2xl transition-all duration-500 rounded-3xl backdrop-blur-sm hover:border-border/60;
   }
 
   /* Modern Input Styles */
   .input-modern {
-    @apply border-gray-200 focus:border-gray-400 focus:ring-gray-400/20 rounded-2xl transition-all duration-300 bg-white/80 backdrop-blur-sm;
+    @apply border-input focus:border-ring focus:ring-ring/20 rounded-2xl transition-all duration-300 bg-background backdrop-blur-sm;
   }
 
   /* Gradient Text */
   .text-gradient {
-    @apply bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-foreground via-foreground/80 to-foreground bg-clip-text text-transparent;
   }
 
   /* Glass Effect */
   .glass {
-    @apply bg-white/80 backdrop-blur-xl border border-white/20;
+    @apply bg-background/80 backdrop-blur-xl border border-border/20;
+  }
+
+  /* Microinteraction Classes */
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10;
+  }
+
+  .pulse-subtle {
+    @apply animate-pulse-slow;
+  }
+
+  .cart-bounce {
+    @apply transition-transform duration-200 hover:scale-110 active:scale-95;
+  }
+
+  .nav-item {
+    @apply relative transition-all duration-300 hover:text-foreground;
+  }
+
+  .nav-item::after {
+    @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+  }
+
+  .nav-item:hover::after {
+    @apply w-full;
   }
 }
 
@@ -107,11 +171,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-50 rounded-full;
+  @apply bg-background rounded-full;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 rounded-full hover:bg-gray-400;
+  @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50;
 }
 
 ::-webkit-scrollbar-corner {
@@ -166,6 +230,17 @@
   }
 }
 
+@keyframes cart-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  75% { transform: rotate(-3deg); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
 /* Premium Animation Classes */
 .animate-float {
   animation: float 3s ease-in-out infinite;
@@ -185,37 +260,45 @@
   background-size: 1000px 100%;
 }
 
+.animate-cart-wiggle {
+  animation: cart-wiggle 0.5s ease-in-out;
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1s ease-in-out infinite;
+}
+
 /* Enhanced Focus States */
 .focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-gray-900/20 focus:ring-offset-2 focus:border-gray-400;
+  @apply focus:outline-none focus:ring-2 focus:ring-ring/20 focus:ring-offset-2 focus:border-ring;
 }
 
 /* Selection Colors */
 ::selection {
-  @apply bg-gray-900/10 text-gray-900;
+  @apply bg-primary/10 text-foreground;
 }
 
 /* Typography Improvements */
 .text-heading {
-  @apply font-bold tracking-tight text-gray-900;
-  font-family: 'Poppins', sans-serif;
+  @apply font-bold tracking-tight text-foreground;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .text-body {
-  @apply text-gray-600 leading-relaxed;
+  @apply text-muted-foreground leading-relaxed;
 }
 
 .text-caption {
-  @apply text-sm text-gray-500 leading-relaxed;
+  @apply text-sm text-muted-foreground leading-relaxed;
 }
 
 /* Modern Badge Styles */
 .badge-modern {
-  @apply bg-gray-100 text-gray-800 border border-gray-200 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm;
+  @apply bg-muted text-muted-foreground border border-border px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm;
 }
 
 .badge-accent {
-  @apply bg-gray-900 text-white px-4 py-2 rounded-full text-sm font-medium shadow-sm;
+  @apply bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium shadow-sm;
 }
 
 /* Container Improvements */
