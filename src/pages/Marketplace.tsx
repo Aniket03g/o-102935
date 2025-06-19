@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Navbar from "../components/Navbar";
@@ -152,51 +151,51 @@ const Marketplace = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
       
-      <main className="container mx-auto px-6 pt-32 pb-20">
+      <main className="container-modern pt-32 pb-20">
         {/* Header Section */}
-        <div className="mb-12">
-          <div className="flex items-center gap-4 mb-4">
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
+        <div className="mb-16 text-center">
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <h1 className="text-heading text-5xl lg:text-6xl text-gradient">
               Marketplace
             </h1>
-            <Badge variant="secondary" className="px-4 py-2 text-sm font-medium bg-blue-50 text-blue-700 border border-blue-200">
+            <div className="badge-accent animate-fade-up" style={{ animationDelay: '200ms' }}>
               Premium Collection
-            </Badge>
+            </div>
           </div>
-          <p className="text-lg text-gray-600 max-w-2xl leading-relaxed">
+          <p className="text-body text-xl max-w-3xl mx-auto animate-fade-up" style={{ animationDelay: '400ms' }}>
             Discover premium technology solutions from trusted brands. Every product is carefully curated for quality and performance.
           </p>
         </div>
 
         {/* Search and Filters */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200/60 p-6 mb-8">
-          <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
+        <div className="card-premium p-8 mb-12 animate-fade-up" style={{ animationDelay: '600ms' }}>
+          <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center justify-between">
             {/* Search */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <div className="relative flex-1 max-w-lg">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <Input
-                placeholder="Search products..."
+                placeholder="Search premium products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500/20"
+                className="input-modern pl-12 h-14 text-lg"
               />
             </div>
 
             <div className="flex flex-wrap gap-4 items-center">
               {/* Results count */}
-              <div className="text-sm text-gray-600 font-medium whitespace-nowrap">
-                <span className="text-gray-900 font-semibold">{filteredProducts.length}</span> products found
+              <div className="text-body font-medium whitespace-nowrap">
+                <span className="text-gray-900 font-bold">{filteredProducts.length}</span> products found
               </div>
               
               {/* Category Filter */}
               <Select value={category} onValueChange={setCategory}>
-                <SelectTrigger className="w-48 h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500/20">
+                <SelectTrigger className="w-56 h-14 input-modern text-lg">
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
-                <SelectContent className="bg-white border-gray-200 shadow-xl">
+                <SelectContent className="glass border-gray-200 shadow-2xl rounded-2xl">
                   <SelectItem value="all">All Categories</SelectItem>
                   <SelectItem value="aio">All-in-One PCs</SelectItem>
                   <SelectItem value="laptops">Laptops</SelectItem>
@@ -208,10 +207,10 @@ const Marketplace = () => {
 
               {/* Sort */}
               <Select value={sortOrder} onValueChange={setSortOrder}>
-                <SelectTrigger className="w-48 h-11 border-gray-300 focus:border-blue-500 focus:ring-blue-500/20">
+                <SelectTrigger className="w-56 h-14 input-modern text-lg">
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
-                <SelectContent className="bg-white border-gray-200 shadow-xl">
+                <SelectContent className="glass border-gray-200 shadow-2xl rounded-2xl">
                   <SelectItem value="newest">Newest First</SelectItem>
                   <SelectItem value="price-asc">Price: Low to High</SelectItem>
                   <SelectItem value="price-desc">Price: High to Low</SelectItem>
@@ -220,22 +219,30 @@ const Marketplace = () => {
               </Select>
 
               {/* View Mode */}
-              <div className="flex bg-gray-100 rounded-lg p-1">
+              <div className="flex bg-gray-100 rounded-2xl p-1.5 border border-gray-200">
                 <Button
                   variant={viewMode === "grid" ? "default" : "ghost"}
                   size="sm"
                   onClick={() => setViewMode("grid")}
-                  className={`h-9 px-3 ${viewMode === "grid" ? "bg-white shadow-sm" : "hover:bg-transparent"}`}
+                  className={`h-12 px-4 rounded-xl font-medium transition-all duration-200 ${
+                    viewMode === "grid" 
+                      ? "bg-white shadow-sm text-gray-900" 
+                      : "hover:bg-white/50 text-gray-600"
+                  }`}
                 >
-                  <Grid size={16} />
+                  <Grid size={18} />
                 </Button>
                 <Button
                   variant={viewMode === "list" ? "default" : "ghost"}
                   size="sm"
                   onClick={() => setViewMode("list")}
-                  className={`h-9 px-3 ${viewMode === "list" ? "bg-white shadow-sm" : "hover:bg-transparent"}`}
+                  className={`h-12 px-4 rounded-xl font-medium transition-all duration-200 ${
+                    viewMode === "list" 
+                      ? "bg-white shadow-sm text-gray-900" 
+                      : "hover:bg-white/50 text-gray-600"
+                  }`}
                 >
-                  <List size={16} />
+                  <List size={18} />
                 </Button>
               </div>
             </div>
@@ -243,100 +250,45 @@ const Marketplace = () => {
         </div>
 
         {/* Products Grid */}
-        <div className={`grid gap-6 ${viewMode === "grid" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" : "grid-cols-1"}`}>
+        <div className={`grid gap-8 ${
+          viewMode === "grid" 
+            ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" 
+            : "grid-cols-1"
+        }`}>
           {filteredProducts.map((product, index) => (
-            <Card 
-              key={product.id} 
-              className="group overflow-hidden bg-white border border-gray-200/60 hover:border-gray-300 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer hover:-translate-y-1 animate-fade-in"
-              style={{ animationDelay: `${index * 50}ms` }}
-              onClick={() => handleProductClick(product.id)}
+            <div 
+              key={product.id}
+              className="animate-fade-up"
+              style={{ animationDelay: `${800 + index * 100}ms` }}
             >
-              <div className="relative aspect-square overflow-hidden bg-gray-50">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                
-                {/* Badge */}
-                <div className={`absolute top-3 left-3 px-3 py-1.5 text-xs font-semibold rounded-full ${getBadgeColor(product.badge)}`}>
-                  {product.badge}
-                </div>
-                
-                {/* Discount */}
-                {product.discount && (
-                  <div className="absolute top-3 right-3 bg-red-500 text-white px-2.5 py-1.5 text-xs font-bold rounded-full shadow-sm">
-                    -{product.discount}%
-                  </div>
-                )}
-                
-                {/* Quick Actions */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                  <div className="flex gap-2">
-                    <Button size="sm" variant="secondary" className="bg-white/95 hover:bg-white text-gray-900 shadow-lg h-9 w-9 p-0">
-                      <Heart size={16} />
-                    </Button>
-                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg h-9 w-9 p-0">
-                      <ShoppingCart size={16} />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="p-5">
-                <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors leading-snug">
-                  {product.name}
-                </h3>
-                
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-xl font-bold text-gray-900">{product.price}</span>
-                  {product.originalPrice && (
-                    <span className="text-sm text-gray-500 line-through">{product.originalPrice}</span>
-                  )}
-                </div>
-                
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="flex items-center gap-1">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star 
-                        key={i}
-                        className={`w-4 h-4 ${i < Math.floor(product.rating) ? "fill-amber-400 text-amber-400" : "text-gray-300"}`}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm font-medium text-gray-900">{product.rating}</span>
-                  <span className="text-sm text-gray-500">
-                    ({product.reviews})
-                  </span>
-                </div>
-                
-                <div className="flex flex-wrap gap-1.5">
-                  {product.specs.slice(0, 2).map((spec, i) => (
-                    <Badge key={i} variant="secondary" className="text-xs px-2 py-1 bg-gray-100 text-gray-700 border-0">
-                      {spec}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </Card>
+              <ProductCard
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                image={product.image}
+                rating={product.rating}
+                reviews={product.reviews}
+              />
+            </div>
           ))}
         </div>
 
         {/* Empty State */}
         {filteredProducts.length === 0 && (
-          <div className="text-center py-20">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Search className="w-8 h-8 text-gray-400" />
+          <div className="text-center py-24 animate-fade-up">
+            <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Search className="w-10 h-10 text-gray-400" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">No products found</h3>
-            <p className="text-gray-600 mb-6">Try adjusting your search or filter criteria</p>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">No products found</h3>
+            <p className="text-body text-lg mb-8 max-w-md mx-auto">
+              Try adjusting your search or filter criteria to find what you're looking for
+            </p>
             <Button 
               onClick={() => {
                 setCategory("all");
                 setSearchQuery("");
               }} 
-              variant="outline"
-              className="border-gray-300 hover:border-gray-400"
+              className="btn-secondary"
             >
               Clear all filters
             </Button>

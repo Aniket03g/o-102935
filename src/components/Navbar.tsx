@@ -32,53 +32,53 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200/60 shadow-sm">
-      <div className="container mx-auto px-6 py-4">
+    <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-gray-200/60 shadow-sm">
+      <div className="container-modern py-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link 
             to="/" 
-            className="text-2xl font-bold text-gray-900 hover:text-blue-600 transition-colors duration-200"
+            className="text-3xl font-bold text-gradient hover:scale-105 transition-transform duration-200"
           >
             TechStore
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-10">
             {categories.map((category) => (
               <Link 
                 key={category.name}
                 to={category.path} 
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group py-2"
+                className="text-gray-700 hover:text-gray-900 font-medium transition-all duration-200 relative group py-3 text-lg"
               >
                 {category.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gray-900 transition-all duration-300 group-hover:w-full rounded-full"></span>
               </Link>
             ))}
           </div>
 
           {/* Actions */}
-          <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="sm" className="h-10 w-10 p-0 hover:bg-gray-100">
-              <Search size={20} className="text-gray-600" />
+          <div className="flex items-center space-x-3">
+            <Button variant="ghost" size="sm" className="h-12 w-12 p-0 hover:bg-gray-100 rounded-2xl transition-all duration-200">
+              <Search size={22} className="text-gray-600" />
             </Button>
             
             <Button 
               variant="ghost" 
               size="sm" 
               onClick={toggleDarkMode}
-              className="h-10 w-10 p-0 hover:bg-gray-100"
+              className="h-12 w-12 p-0 hover:bg-gray-100 rounded-2xl transition-all duration-200"
             >
-              {isDark ? <Sun size={20} className="text-amber-500" /> : <Moon size={20} className="text-gray-600" />}
+              {isDark ? <Sun size={22} className="text-amber-500" /> : <Moon size={22} className="text-gray-600" />}
             </Button>
             
-            <Button variant="ghost" size="sm" className="h-10 w-10 p-0 hover:bg-gray-100">
-              <User size={20} className="text-gray-600" />
+            <Button variant="ghost" size="sm" className="h-12 w-12 p-0 hover:bg-gray-100 rounded-2xl transition-all duration-200">
+              <User size={22} className="text-gray-600" />
             </Button>
             
-            <Button variant="ghost" size="sm" className="h-10 w-10 p-0 hover:bg-gray-100 relative">
-              <ShoppingCart size={20} className="text-gray-600" />
-              <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium text-[10px]">
+            <Button variant="ghost" size="sm" className="h-12 w-12 p-0 hover:bg-gray-100 rounded-2xl transition-all duration-200 relative">
+              <ShoppingCart size={22} className="text-gray-600" />
+              <span className="absolute -top-1 -right-1 bg-gray-900 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-medium text-[11px]">
                 0
               </span>
             </Button>
@@ -87,21 +87,23 @@ const Navbar = () => {
               variant="ghost"
               size="sm"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden h-10 w-10 p-0 hover:bg-gray-100"
+              className="lg:hidden h-12 w-12 p-0 hover:bg-gray-100 rounded-2xl transition-all duration-200"
             >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </Button>
           </div>
         </div>
 
         {/* Mobile Menu */}
-        <div className={`lg:hidden overflow-hidden transition-all duration-300 ${isMobileMenuOpen ? 'max-h-80 opacity-100 mt-6' : 'max-h-0 opacity-0'}`}>
-          <div className="bg-gray-50 rounded-xl p-4 space-y-2 border border-gray-200">
+        <div className={`lg:hidden overflow-hidden transition-all duration-500 ${
+          isMobileMenuOpen ? 'max-h-96 opacity-100 mt-8' : 'max-h-0 opacity-0'
+        }`}>
+          <div className="glass rounded-3xl p-6 space-y-2 border border-gray-200">
             {categories.map((category) => (
               <Link 
                 key={category.name}
                 to={category.path}
-                className="block py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg font-medium transition-all duration-200"
+                className="block py-4 px-6 text-gray-700 hover:text-gray-900 hover:bg-white/50 rounded-2xl font-medium transition-all duration-200 text-lg"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {category.name}
