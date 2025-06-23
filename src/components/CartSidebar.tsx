@@ -22,11 +22,11 @@ const CartSidebar = () => {
         <Button
           variant="ghost"
           size="icon"
-          className="relative h-10 w-10 rounded-full hover:bg-white/10 transition-all duration-200"
+          className="relative h-10 w-10 rounded-full hover:bg-accent/50 transition-all duration-200"
         >
-          <ShoppingCart size={20} className="text-white" />
+          <ShoppingCart size={20} className="text-foreground" />
           {getTotalItems() > 0 && (
-            <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 text-xs bg-accent text-accent-foreground animate-pulse">
+            <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 text-xs bg-primary text-primary-foreground animate-pulse">
               {getTotalItems()}
             </Badge>
           )}
@@ -101,11 +101,11 @@ const CartSidebar = () => {
                   </div>
                   <div className="text-right">
                     <p className="font-bold text-sm">
-                      ${(item.price * item.quantity).toLocaleString()}
+                      ₹{(item.price * item.quantity).toLocaleString()}
                     </p>
                     {item.originalPrice && (
                       <p className="text-xs text-muted-foreground line-through">
-                        ${(item.originalPrice * item.quantity).toLocaleString()}
+                        ₹{(item.originalPrice * item.quantity).toLocaleString()}
                       </p>
                     )}
                   </div>
@@ -116,7 +116,7 @@ const CartSidebar = () => {
             <div className="border-t border-border pt-6 mt-6 space-y-4">
               <div className="flex justify-between items-center text-lg font-bold">
                 <span>Total:</span>
-                <span>${getTotalPrice().toLocaleString()}</span>
+                <span>₹{getTotalPrice().toLocaleString()}</span>
               </div>
               <Button 
                 onClick={handleCheckout} 

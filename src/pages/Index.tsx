@@ -1,4 +1,3 @@
-
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
 import CategoryNav from "../components/CategoryNav";
@@ -9,7 +8,7 @@ const featuredProducts = [
   {
     id: 1,
     name: "MacBook Pro 14-inch",
-    price: "$1,999",
+    price: "₹1,64,900",
     image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8",
     rating: 4.8,
     reviews: 342
@@ -17,7 +16,7 @@ const featuredProducts = [
   {
     id: 2,
     name: "Gaming Laptop RTX 4080",
-    price: "$1,899",
+    price: "₹1,56,900",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
     rating: 4.7,
     reviews: 189
@@ -25,7 +24,7 @@ const featuredProducts = [
   {
     id: 3,
     name: "Ultrabook ThinkPad X1",
-    price: "$1,299",
+    price: "₹1,07,200",
     image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed",
     rating: 4.6,
     reviews: 156
@@ -33,7 +32,7 @@ const featuredProducts = [
   {
     id: 4,
     name: "Wireless Printer Pro",
-    price: "$399",
+    price: "₹32,900",
     image: "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae",
     rating: 4.4,
     reviews: 223
@@ -54,7 +53,7 @@ const benefits = [
   {
     icon: <Truck className="w-8 h-8" />,
     title: "Free Shipping",
-    description: "Complimentary shipping on all orders over $50 nationwide"
+    description: "Complimentary shipping on all orders over ₹4,000 nationwide"
   },
   {
     icon: <Headphones className="w-8 h-8" />,

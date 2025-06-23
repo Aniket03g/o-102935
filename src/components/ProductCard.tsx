@@ -43,7 +43,7 @@ const ProductCard = ({
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 600));
     
-    // Convert price string to number
+    // Convert price string to number (remove ₹ and commas)
     const numericPrice = parseInt(price.replace(/[^0-9]/g, ''));
     const numericOriginalPrice = originalPrice ? parseInt(originalPrice.replace(/[^0-9]/g, '')) : undefined;
     
