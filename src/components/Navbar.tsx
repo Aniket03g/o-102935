@@ -25,8 +25,19 @@ const Navbar = () => {
     { name: 'Categories', path: '/marketplace?category=all' },
   ];
 
-  const isActivePath = (path: string) => {
+  const isActivePath = (path: string, name: string) => {
     if (path === '/') return location.pathname === '/';
+    
+    // Special handling for Categories - it should be active when on marketplace with category param
+    if (name === 'Categories') {
+      return location.pathname === '/marketplace' && location.search.includes('category=');
+    }
+    
+    // Special handling for Marketplace - it should be active when on marketplace without category param or with category=all but not from Categories click
+    if (name === 'Marketplace') {
+      return location.pathname === '/marketplace' && (!location.search.includes('category=') || location.search === '');
+    }
+    
     return location.pathname.startsWith(path.split('?')[0]);
   };
 
@@ -36,8 +47,14 @@ const Navbar = () => {
     console.log('Theme toggled to:', newTheme);
   };
 
-  const handleNavItemClick = (path: string) => {
-    if (path.includes('?')) {
+  const handleNavItemClick = (path: string, name: string) => {
+    if (name === 'Categories') {
+      // Navigate to marketplace with all categories showing
+      navigate('/marketplace?category=all');
+    } else if (name === 'Marketplace') {
+      // Navigate to marketplace without category filter
+      navigate('/marketplace');
+    } else if (path.includes('?')) {
       const [pathname, search] = path.split('?');
       navigate(`${pathname}?${search}`);
     } else {
@@ -67,9 +84,9 @@ const Navbar = () => {
               {navItems.map((item) => (
                 <button
                   key={item.name}
-                  onClick={() => handleNavItemClick(item.path)} 
+                  onClick={() => handleNavItemClick(item.path, item.name)} 
                   className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 relative overflow-hidden group ${
-                    isActivePath(item.path)
+                    isActivePath(item.path, item.name)
                       ? 'text-primary bg-primary/10'
                       : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
                   }`}
@@ -147,9 +164,9 @@ const Navbar = () => {
                 {navItems.map((item) => (
                   <button
                     key={item.name}
-                    onClick={() => handleNavItemClick(item.path)}
+                    onClick={() => handleNavItemClick(item.path, item.name)}
                     className={`block w-full text-left px-6 py-4 rounded-xl font-medium transition-all duration-200 ${
-                      isActivePath(item.path)
+                      isActivePath(item.path, item.name)
                         ? 'text-primary bg-primary/10'
                         : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
                     }`}
