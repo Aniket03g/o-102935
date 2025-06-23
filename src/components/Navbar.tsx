@@ -1,151 +1,181 @@
 
-import { Search, User, ShoppingCart, Moon, Sun, Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Menu, X, Sun, Moon, Search, User, Heart } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useTheme } from 'next-themes';
+import CartSidebar from './CartSidebar';
 
 const Navbar = () => {
-  const [isDark, setIsDark] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
-  const [isCartAnimating, setIsCartAnimating] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
-    setIsDark(isDarkMode);
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    setMounted(true);
   }, []);
 
-  const toggleDarkMode = () => {
-    const newDarkMode = !isDark;
-    setIsDark(newDarkMode);
-    localStorage.setItem('darkMode', newDarkMode.toString());
-    if (newDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  };
-
-  const handleCartClick = () => {
-    setIsCartAnimating(true);
-    setTimeout(() => setIsCartAnimating(false), 500);
-  };
-
-  const categories = [
-    { name: "Electronics", path: "/marketplace?category=electronics" },
-    { name: "Laptops", path: "/marketplace?category=laptops" },
-    { name: "Gaming", path: "/marketplace?category=gaming" },
-    { name: "Mobile", path: "/marketplace?category=mobile" },
-    { name: "Accessories", path: "/marketplace?category=accessories" }
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Marketplace', path: '/marketplace' },
+    { name: 'Categories', path: '/marketplace?category=all' },
   ];
 
+  const isActivePath = (path: string) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname.startsWith(path);
+  };
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/60 shadow-sm transition-all duration-300">
-      <div className="container-modern py-6">
-        <div className="flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/20 transition-all duration-300">
+      <div className="container-modern">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link 
-            to="/" 
-            className="text-3xl font-bold font-heading text-gradient hover:scale-105 transition-all duration-300 hover:drop-shadow-sm"
+          <div 
+            className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity duration-200"
+            onClick={() => navigate('/')}
           >
-            TechStore
-          </Link>
-          
+            <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center shadow-lg">
+              <span className="text-primary-foreground font-bold text-lg">T</span>
+            </div>
+            <span className="text-2xl font-bold text-foreground tracking-tight">TechHub</span>
+          </div>
+
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-10">
-            {categories.map((category) => (
-              <Link 
-                key={category.name}
-                to={category.path} 
-                className="nav-item text-muted-foreground hover:text-foreground font-medium transition-all duration-300 py-3 text-lg"
+          <div className="hidden md:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => navigate(item.path)} 
+                className={`px-6 py-3 rounded-xl font-medium transition-all duration-200 relative overflow-hidden group ${
+                  isActivePath(item.path)
+                    ? 'text-primary bg-primary/10'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+                }`}
               >
-                {category.name}
-              </Link>
+                <span className="relative z-10">{item.name}</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+              </button>
             ))}
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center space-x-3">
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="h-12 w-12 p-0 hover:bg-muted rounded-2xl transition-all duration-300 hover:scale-110 hover:shadow-md"
-            >
-              <Search size={22} className="text-muted-foreground transition-colors duration-200" />
-            </Button>
-            
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={toggleDarkMode}
-              className="h-12 w-12 p-0 hover:bg-muted rounded-2xl transition-all duration-300 hover:scale-110 hover:shadow-md hover:rotate-12"
-            >
-              {isDark ? (
-                <Sun size={22} className="text-amber-500 transition-all duration-300" />
-              ) : (
-                <Moon size={22} className="text-muted-foreground transition-all duration-300" />
-              )}
-            </Button>
-            
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="h-12 w-12 p-0 hover:bg-muted rounded-2xl transition-all duration-300 hover:scale-110 hover:shadow-md"
-            >
-              <User size={22} className="text-muted-foreground transition-colors duration-200" />
-            </Button>
-            
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={handleCartClick}
-              className={`h-12 w-12 p-0 hover:bg-muted rounded-2xl transition-all duration-300 hover:scale-110 hover:shadow-md relative ${
-                isCartAnimating ? 'animate-cart-wiggle' : ''
-              }`}
-            >
-              <ShoppingCart size={22} className="text-muted-foreground transition-colors duration-200" />
-              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full w-6 h-6 flex items-center justify-center font-medium text-[11px] transition-all duration-200 hover:scale-110">
-                {cartCount}
-              </span>
-            </Button>
-            
-            <Button 
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center space-x-3">
+            <Button
               variant="ghost"
-              size="sm"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden h-12 w-12 p-0 hover:bg-muted rounded-2xl transition-all duration-300 hover:scale-110"
+              size="icon"
+              className="h-10 w-10 rounded-full hover:bg-accent/50 transition-all duration-200"
+              onClick={() => navigate('/marketplace')}
             >
-              {isMobileMenuOpen ? (
-                <X size={22} className="transition-transform duration-200 rotate-90" />
-              ) : (
-                <Menu size={22} className="transition-transform duration-200" />
-              )}
+              <Search size={20} />
+            </Button>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 rounded-full hover:bg-accent/50 transition-all duration-200"
+            >
+              <Heart size={20} />
+            </Button>
+
+            <CartSidebar />
+
+            {mounted && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                className="h-10 w-10 rounded-full hover:bg-accent/50 transition-all duration-200"
+              >
+                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+              </Button>
+            )}
+
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-10 w-10 rounded-full hover:bg-accent/50 transition-all duration-200"
+            >
+              <User size={20} />
+            </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center space-x-2">
+            <CartSidebar />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen(!isOpen)}
+              className="h-10 w-10 rounded-full hover:bg-accent/50 transition-all duration-200"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        <div className={`lg:hidden overflow-hidden transition-all duration-500 ${
-          isMobileMenuOpen ? 'max-h-96 opacity-100 mt-8' : 'max-h-0 opacity-0'
-        }`}>
-          <div className="bg-card/80 backdrop-blur-xl rounded-3xl p-6 space-y-2 border border-border">
-            {categories.map((category) => (
-              <Link 
-                key={category.name}
-                to={category.path}
-                className="block py-4 px-6 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-2xl font-medium transition-all duration-300 text-lg hover:translate-x-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {category.name}
-              </Link>
-            ))}
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/20 shadow-2xl animate-fade-in">
+            <div className="px-6 py-8 space-y-4">
+              {navItems.map((item) => (
+                <button
+                  key={item.name}
+                  onClick={() => {
+                    navigate(item.path);
+                    setIsOpen(false);
+                  }}
+                  className={`block w-full text-left px-6 py-4 rounded-xl font-medium transition-all duration-200 ${
+                    isActivePath(item.path)
+                      ? 'text-primary bg-primary/10'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+                  }`}
+                >
+                  {item.name}
+                </button>
+              ))}
+              
+              <div className="flex items-center justify-between pt-6 border-t border-border/20">
+                <div className="flex items-center space-x-2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-10 w-10 rounded-full hover:bg-accent/50"
+                  >
+                    <Search size={20} />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-10 w-10 rounded-full hover:bg-accent/50"
+                  >
+                    <Heart size={20} />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-10 w-10 rounded-full hover:bg-accent/50"
+                  >
+                    <User size={20} />
+                  </Button>
+                </div>
+                
+                {mounted && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                    className="h-10 w-10 rounded-full hover:bg-accent/50"
+                  >
+                    {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                  </Button>
+                )}
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </nav>
   );
